@@ -31,11 +31,12 @@ a3 = r1.to_a.shuffle
 
 # print a2
 
+# print a3
 
+ar1 = [10,20,30,40]
 
-print a3
+ar1 << 50
 
-
-
+ar1 << 60
 
 puts "\n"
