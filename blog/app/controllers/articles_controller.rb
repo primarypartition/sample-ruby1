@@ -2,13 +2,11 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   # GET /articles
-  # GET /articles.json
   def index
     @articles = Article.all
   end
 
   # GET /articles/1
-  # GET /articles/1.json
   def show
 	# byebug
     #@article = Article.find(params[:id])
@@ -20,11 +18,12 @@ class ArticlesController < ApplicationController
   end
 
   # POST /articles
-  # POST /articles.json
   def create
     #@article = Article.new(params.require(:article).permit(:title, :description))
     @article = Article.new(article_params)
 		
+	@article.user = User.first 
+	
 	if @article.save	  
 	  flash[:notice] = "Article was created successfully."
 	  redirect_to @article
@@ -51,7 +50,6 @@ class ArticlesController < ApplicationController
   end
 
   # PATCH/PUT /articles/1
-  # PATCH/PUT /articles/1.json
   def update
 	#@article = Article.find(params[:id])
 	
@@ -75,7 +73,6 @@ class ArticlesController < ApplicationController
   end
 
   # DELETE /articles/1
-  # DELETE /articles/1.json
   def destroy
     #@article = Article.find(params[:id])
     @article.destroy

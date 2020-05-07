@@ -1,10 +1,13 @@
-Rails.application.routes.draw do
-  resources :articles
-  
+Rails.application.routes.draw do  
+  # Page Routes
+  root 'pages#home'  
+  get 'about', to: 'pages#about'
+
+  # Article Routes
+  resources :articles  
   # resources :articles, only: [:show, :index, :new, :create, :edit, :update, :destroy]
   
-  get 'about', to: 'pages#about'
-	
-  root 'pages#home'
-	
+  # User Routes
+  get 'signup', to: 'users#new'
+  resources :users, except: [:new]    	
 end
