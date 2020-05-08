@@ -1,15 +1,16 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-
+  before_action :require_user, except: [:show, :index]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
+  
   # GET /articles
   def index
-    @articles = Article.all
+    @articles = Article.all.paginate(page: params[:page], per_page: 5)	
   end
 
   # GET /articles/1
   def show
 	# byebug
-    #@article = Article.find(params[:id])
   end
 
   # GET /articles/new
@@ -19,29 +20,18 @@ class ArticlesController < ApplicationController
 
   # POST /articles
   def create
-    #@article = Article.new(params.require(:article).permit(:title, :description))
     @article = Article.new(article_params)
 		
-	@article.user = User.first 
+	@article.user = current_user 
 	
 	if @article.save	  
 	  flash[:notice] = "Article was created successfully."
+	  
 	  redirect_to @article
 	  #redirect_to article_path(@article)	
 	else
       render :new 
 	end
-	
-    #respond_to do |format|
-    #  if @article.save
-    #    format.html { redirect_to @article, notice: 'Article was successfully created.' }
-    #    format.json { render :show, status: :created, location: @article }
-    #  else
-    #    format.html { render :new }
-    #    format.json { render json: @article.errors, status: :unprocessable_entity }
-    #  end
-    #end
-
   end
 
   # GET /articles/1/edit
@@ -51,38 +41,23 @@ class ArticlesController < ApplicationController
 
   # PATCH/PUT /articles/1
   def update
-	#@article = Article.find(params[:id])
-	
+	#@article = Article.find(params[:id])	
 	#if @article.update(params.require(:article).permit(:title, :description))
+	
 	if @article.update(article_params)
       flash[:notice] = "Article was updated successfully."
       redirect_to @article
     else
       render 'edit'
     end	
-  
-    #respond_to do |format|
-    #  if @article.update(article_params)
-    #    format.html { redirect_to @article, notice: 'Article was successfully updated.' }
-    #    format.json { render :show, status: :ok, location: @article }
-    #  else
-    #    format.html { render :edit }
-    #    format.json { render json: @article.errors, status: :unprocessable_entity }
-    #  end
-    #end
   end
 
   # DELETE /articles/1
   def destroy
     #@article = Article.find(params[:id])
     @article.destroy
-    redirect_to articles_path
 	
-    #@article.destroy
-    #respond_to do |format|
-    #  format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
-    #  format.json { head :no_content }
-    #end
+    redirect_to articles_path
   end
 
   private
@@ -95,4 +70,13 @@ class ArticlesController < ApplicationController
     def article_params
       params.require(:article).permit(:title, :description)
     end
+	
+	# Require same user for action
+	def require_same_user
+		if current_user != @article.user && !current_user.admin?
+		  flash[:alert] = "You can only edit or delete your own article"
+		  
+		  redirect_to @article
+		end
+	end
 end

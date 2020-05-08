@@ -1,16 +1,12 @@
-#pages controller
 class PagesController < ApplicationController
 
-#home page
-def home
+	# GET /
+	def home
 
+	end
 
-end
+	# GET /about
+	def about
 
-#about page
-def about
-
-
-end
-
+	end
 end

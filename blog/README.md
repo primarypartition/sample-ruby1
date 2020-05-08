@@ -254,24 +254,3 @@ background-color: #FDF6EA !important;
 }
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
