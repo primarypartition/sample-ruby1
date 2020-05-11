@@ -227,7 +227,8 @@ gem 'jquery-rails'
 
 Add one of these lines
 
+```
 > config.action_cable.disable_request_forgery_protection = true
 or
 > config.action_cable.allowed_request_origins = ['https://sample-ruby1-galabata.herokuapp.com']
-  
+```  
