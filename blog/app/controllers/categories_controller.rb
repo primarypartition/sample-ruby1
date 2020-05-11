@@ -31,19 +31,20 @@ class CategoriesController < ApplicationController
 	end
 	
 	# GET /categories/1/edit
-    def edit
-		
-    end
+  def edit
+  
+  end
 
 	# PATCH/PUT /categories/1
 	def update	
-	  if @category.update(category_params)
-	    flash[:notice] = "Category was updated successfully."
-	    redirect_to @category
-	  else
-	    render 'edit'
-	  end	
-    end
+    if @category.update(category_params)
+      flash[:notice] = "Category was updated successfully."
+      
+      redirect_to @category
+    else
+      render 'edit'
+    end	
+  end
 	
 private
 	#

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-    before_action :set_user, only: [:show, :edit, :update, :destroy]
-    before_action :require_user, only: [:edit, :update]
-    before_action :require_same_user, only: [:edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, only: [:edit, :update]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
   
 	# GET /users	
 	def index
@@ -59,12 +59,12 @@ class UsersController < ApplicationController
 private
 	# Only allow a list of trusted parameters through.
     def user_params
-		params.require(:user).permit(:username, :email, :password)
+      params.require(:user).permit(:username, :email, :password)
     end
 	
 	# Use callbacks to share common setup or constraints between actions.
     def set_user
-		@user = User.find(params[:id])
+      @user = User.find(params[:id])
     end
 	
 	# Require same user for action

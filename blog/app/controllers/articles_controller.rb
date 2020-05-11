@@ -10,7 +10,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1
   def show
-	# byebug
+    # byebug
   end
 
   # GET /articles/new
@@ -22,29 +22,29 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
 		
-	@article.user = current_user 
-	
-	if @article.save	  
-	  flash[:notice] = "Article was created successfully."
-	  
-	  redirect_to @article
-	  #redirect_to article_path(@article)	
-	else
-      render :new 
-	end
+    @article.user = current_user 
+    
+    if @article.save	  
+      flash[:notice] = "Article was created successfully."
+      
+      redirect_to @article
+      #redirect_to article_path(@article)	
+    else
+        render :new 
+    end
   end
 
   # GET /articles/1/edit
   def edit
-	#@article = Article.find(params[:id])
+    #@article = Article.find(params[:id])
   end
 
   # PATCH/PUT /articles/1
   def update
-	#@article = Article.find(params[:id])	
-	#if @article.update(params.require(:article).permit(:title, :description))
-	
-	if @article.update(article_params)
+    #@article = Article.find(params[:id])	
+    #if @article.update(params.require(:article).permit(:title, :description))
+    
+    if @article.update(article_params)
       flash[:notice] = "Article was updated successfully."
       redirect_to @article
     else

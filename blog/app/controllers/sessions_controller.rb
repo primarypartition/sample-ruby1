@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 
   # POST /login
   def create
-	user = User.find_by(email: params[:session][:email].downcase)
+	  user = User.find_by(email: params[:session][:email].downcase)
 	
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
 
   # DELETE /logout
   def destroy
-	session[:user_id] = nil
+    session[:user_id] = nil
     flash[:notice] = "Logged out"
 	
     redirect_to root_path
