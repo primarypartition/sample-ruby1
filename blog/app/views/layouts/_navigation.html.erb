@@ -5,10 +5,7 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-	    <%= link_to "Home", root_path, class: "nav-link" %>       
-      </li>
+    <ul class="navbar-nav mr-auto">    
       <li class="nav-item">
          <%= link_to "About", about_path, class: "nav-link" %> 
       </li>
@@ -19,15 +16,24 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 		  <% if logged_in? %>
             <%= link_to "New Article", new_article_path, class: "dropdown-item" %>
-		    <div class="dropdown-divider"></div>   
+		    <div class="dropdown-divider"></div> 			
 		  <% end %>
+		  
           <%= link_to "Articles", articles_path, class: "dropdown-item" %>
-          <div class="dropdown-divider"></div>          
+          <div class="dropdown-divider"></div> 
+		  
+		  <% if logged_in? and current_user.admin? %>
+			<%= link_to "New Category", new_category_path, class: "dropdown-item" %>
+			<div class="dropdown-divider"></div>      
+		  <% end %>
+		  
+		  <%= link_to "Categories", categories_path, class: "dropdown-item" %>
+          <div class="dropdown-divider"></div>
         </div>
       </li>    
 	  <li class="nav-item active">
 	    <%= link_to "Users", users_path, class: "nav-link" %>       
-      </li>
+      </li> 	  
 	  <% if logged_in? %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

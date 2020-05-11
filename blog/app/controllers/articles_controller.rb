@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
   
   # GET /articles
   def index
-    @articles = Article.all.paginate(page: params[:page], per_page: 5)	
+    @articles = Article.paginate(page: params[:page], per_page: 5)	
   end
 
   # GET /articles/1
@@ -68,7 +68,7 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:title, :description)
+      params.require(:article).permit(:title, :description, category_ids: [])
     end
 	
 	# Require same user for action

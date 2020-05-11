@@ -5,12 +5,12 @@ class UsersController < ApplicationController
   
 	# GET /users	
 	def index
-		@users = User.all.paginate(page: params[:page], per_page: 5)
+		@users = User.paginate(page: params[:page], per_page: 5)
 	end
 	
 	# GET /users/1
 	def show		
-		@articles = @user.articles.all.paginate(page: params[:page], per_page: 5)
+		@articles = @user.articles.paginate(page: params[:page], per_page: 5)
 	end
  
 	# GET /signup
