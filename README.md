@@ -23,6 +23,7 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo s
 
 ## Commands
 
+```
 > rails g controller messages
 > rails g model message
 > rails routes -c messages
@@ -34,3 +35,4 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo s
 > rails s
 > rails g migration create_table
 > rails g channel Chatee
+```
