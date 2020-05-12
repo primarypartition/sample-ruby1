@@ -1,5 +1,6 @@
 # Ruby on Rails Setup on AWS Cloud9
 
+
 ## Ruby
 
 ```
@@ -8,12 +9,14 @@ rvm list rubies
 rvm list known
 ```
 
+
 ## NodeJs
 
 ```
 nodejs -v
 node -v
 ```
+
 
 ## Yarn
 
@@ -28,12 +31,14 @@ sudo apt update && sudo apt install yarn
 sudo apt update && sudo apt install --no-install-recommends yarn
 ```
 
+
 ## Gem bundler
 
 ```
 gem list bundler
 gem update bundler
 ```
+
 
 ## Rails
 
@@ -42,6 +47,7 @@ gem list rails
 rails -v
 gem install rails
 ```
+
 
 ## Rails project run
 
@@ -52,8 +58,4 @@ rails s
 
 vim /blog/config/environments/development.rb
 config.hosts << "xxxxxxxxxxxxxxxxxxxxxxxxxxx.vfs.cloud9.us-east-2.amazonaws.com"
-
 ```
-
-
-

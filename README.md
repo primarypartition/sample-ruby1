@@ -8,9 +8,13 @@
 
 > https://sample-ruby1-blog.herokuapp.com/
 
-### Chat 
+### GalaBata
 
 > https://sample-ruby1-galabata.herokuapp.com/
+
+### MainStreet
+
+> https://sample-ruby1-mainstreet.herokuapp.com/
 
 
 ## Random Issues
@@ -24,6 +28,8 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo s
 ## Commands
 
 ```
+> rails -v
+> ruby -v
 > rails g controller messages
 > rails g model message
 > rails routes -c messages
