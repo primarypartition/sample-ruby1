@@ -30,7 +30,7 @@ class User < ApplicationRecord
   
   #
   def full_name
-    return "#{first_name} #{last_name}" if first_name.strip! || last_name.strip!
+    return "#{first_name} #{last_name}" if first_name || last_name
     
     "Anonymous"
   end
