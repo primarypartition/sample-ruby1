@@ -63,7 +63,7 @@ Rails.application.credentials.iex_client[:sandbox_api_secret]
 ```
 heroku config:set RAILS_MASTER_KEY=<your-master-key>
 heroku config:set RAILS_MASTER_KEY="$(< config/master.key)"
-
+```
 
 ## Random Issues
 

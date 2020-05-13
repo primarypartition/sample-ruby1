@@ -1,6 +1,6 @@
 class StockController < ApplicationController
   # GET /search_stock
-   def search
+  def search
     if params[:stock].present?
       @stock = Stock.new_lookup(params[:stock])
       

@@ -1,0 +1,19 @@
+<h1>Friends</h1>
+
+<div class='search-area'>
+  <h3>Search Friends</h3>
+  
+  <%= render 'search' %>
+</div> 
+
+<div id="messages">
+
+</div>
+
+<div id="friend-results">
+
+</div>
+
+<% if !@friends.empty? %>
+  <%= render 'friendships/list' %>
+<% end %>
