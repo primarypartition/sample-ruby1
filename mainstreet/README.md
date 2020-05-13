@@ -203,6 +203,154 @@ rails s -b 192.168.33.100 -p 3000
 > touch app/assets/stylesheets/custom.css.scss
 
 
-## Devise gem
+## Bootstrap setup
+
+```
+yarn add bootstrap@4.4.1 jquery popper.js
+
+```
+
+
+### Edit app/assets/stylesheets/application.css
+
+Add line
+
+> *= require bootstrap
+ 
+ 
+### Edit config/webpack/environment.js
+
+```
+const { environment } = require('@rails/webpacker')
+
+const webpack = require("webpack")
+
+environment.plugins.append("Provide", new webpack.ProvidePlugin({
+
+$: 'jquery',
+
+jQuery: 'jquery',
+
+Popper: ['popper.js', 'default']
+
+}))
+
+module.exports = environment
+```
+
+
+### Edit app/javascript/packs/application.js
+
+Add line in bottom
+
+> import "bootstrap"
+
+
+### Add custom scss file app/assets/stylesheets/custom.css.scss
+
+> touch app/assets/stylesheets/custom.css.scss
+
+```
+@import 'bootstrap/dist/css/bootstrap';
+
+.navbar {
+
+background-color: #FDF6EA !important;
+
+}
+```
+
+
+## Devise and Devise Views gems
 
 > https://github.com/heartcombo/devise
+
+```
+gem 'devise'
+bundle install
+
+rails generate devise:install
+rails generate devise User
+rails db:migrate
+
+> ApplicationController
+> UserModel
+```
+
+> https://github.com/hisea/devise-bootstrap-views
+
+```
+gem 'devise-bootstrap-views', '~> 1.0'
+bundle install
+
+rails generate devise:views:bootstrap_templates
+```
+
+## iex API and Rails Credentials
+
+
+### Gem
+
+> https://github.com/dblock/iex-ruby-client
+
+```
+gem 'iex-ruby-client'
+
+```
+
+> bundle install
+
+### Sign up API
+
+> https://iexcloud.io/
+
+> rails c
+
+```
+client = IEX::Api::Client.new(
+  publishable_token: 'publishable_token',
+  secret_token: 'secret_token',
+  endpoint: 'https://sandbox.iexapis.com/v1'
+)
+
+client.price('AAPL')
+```
+
+### Rails Credentials
+
+> Setup class method
+
+```
+client = IEX::Api::Client.new(
+      publishable_token: Rails.application.credentials.iex_client[:sandbox_api_key],
+      secret_token: Rails.application.credentials.iex_client[:sandbox_api_secret],
+      endpoint: 'https://sandbox.iexapis.com/v1'
+    )
+
+```
+
+> Config config/credentials.yml.enc File
+
+```
+rails credentials:edit 
+or
+EDITOR=vim rails credentials:edit
+
+iex_client:
+        sandbox_api_key: Tpk_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        sandbox_api_secret: Tsk_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+> Test on console
+
+```
+Rails.application.credentials.iex_client[:sandbox_api_key]
+Rails.application.credentials.iex_client[:sandbox_api_secret]
+```
+
+> Heroku Config for config/master.key
+
+```
+heroku config:set RAILS_MASTER_KEY=<your-master-key>
+heroku config:set RAILS_MASTER_KEY="$(< config/master.key)"
+```
