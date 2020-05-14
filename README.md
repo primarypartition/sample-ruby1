@@ -4,17 +4,21 @@
 ## Project Urls
 
 
-### Blog 
+### Blog App
 
 > https://sample-ruby1-blog.herokuapp.com/
 
-### GalaBata
+### GalaBata (Chat App)
 
 > https://sample-ruby1-galabata.herokuapp.com/
 
-### MainStreet
+### MainStreet (Stock Market App)
 
 > https://sample-ruby1-mainstreet.herokuapp.com/
+
+### Tasweer (Photo App)
+
+> https://sample-ruby1-tasweer.herokuapp.com/
 
 
 ## Commands
