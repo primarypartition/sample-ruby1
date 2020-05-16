@@ -1,0 +1,4 @@
+# sendgrid API 
+SENDGRID_USERNAME: sg_apikey
+SENDGRID_PASSWORD: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+SENDGRID_API_KEY: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
