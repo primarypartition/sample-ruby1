@@ -6,13 +6,11 @@
       <span class="icon-bar"></span>
     </button>
     
-    <a class="navbar-brand" href="#">Tasweer</a>
+    <%= link_to "Tasweer", root_path, class: "navbar-brand" %>
     
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav">
-        <li><%= link_to "Link1", "/path1"  %></li>
-        <li><%= link_to "Link2", "/path2"  %></li>
-        <li><%= link_to "Link3", "/path3"  %></li>
+        <li><%= link_to "Images", images_path  %></li>   
       </ul>
       
       <ul class="nav navbar-right col-md-4">

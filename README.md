@@ -48,7 +48,8 @@
 > rails generate devise:views:bootstrap_templates
 > bundle install
 > bundle install --without production
-
+> rails g bootstrap:themed Images
+> rails generate uploader Picture
 ```
 
 
@@ -243,4 +244,119 @@ heroku config:set STRIPE_TEST_SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ```
 Test credit card: 4242 4242 4242 4242 
+```
+
+
+## Image gems and libs
+
+> sudo apt-get install build-essential libcurl4-openssl-dev gcc libxml2-dev ruby ruby-dev -y
+> sudo apt-get update
+> sudo apt-get upgrade -y
+> sudo apt-get install imagemagick --fix-missing
+
+```
+gem 'carrierwave'
+gem 'mini_magick'
+
+bundle install
+```
+
+> Uploader config
+
+```
+include CarrierWave::MiniMagick
+process resize_to_limit: [300, 300]
+```
+
+
+## Cloud Storage i.e S3
+
+
+### gem install
+
+```
+gem 'fog'
+
+bundle install
+```
+
+
+### Uploader config`
+
+```
+if Rails.env.production?
+  storage :fog
+else
+  storage :file
+end
+```
+
+
+### Create aws IAM user and S3 Bucket
+
+> https://aws.amazon.com/premiumsupport/knowledge-center/s3-console-access-certain-bucket/
+
+1) Create IAM user
+2) Create S3 bucket
+3) Create policy with s3 bucket details
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::xxxxxxx",
+                "arn:aws:s3:::xxxxxxx/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::xxxxxxx",
+                "arn:aws:s3:::xxxxxxx/*"
+            ]
+        }
+    ]
+}
+```
+
+4) Attach policy to IAM user created
+
+
+### Heroku config
+
+```
+heroku config:set S3_ACCESS_KEY=xxxxxxxxxxxxxxxxxxxxxxxxx
+heroku config:set S3_SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+heroku config:set S3_BUCKET=xxxxxxxxxxxxxxxxxxxxxxxx
+heroku config:set S3_BUCKET_REGION=xxxxxxxxxxxxxxx
+```
+
+
+### config/initializers
+
+> https://www.rubydoc.info/gems/carrierwave/CarrierWave/Storage/Fog
+
+```
+if Rails.env.production?
+  CarrierWave.configure do |config|
+    config.fog_credentials = {
+      :provider => 'AWS',
+      :aws_access_key_id => ENV['S3_ACCESS_KEY'],
+      :aws_secret_access_key => ENV['S3_SECRET_KEY'],
+      :region => ENV['S3_BUCKET_REGION']
+    }
+
+    config.fog_directory = ENV['S3_BUCKET']
+    config.fog_public = true
+  end
+end
 ```

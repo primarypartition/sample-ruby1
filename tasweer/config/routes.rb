@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :images
   # Auth
   devise_for :users, :controllers => { :registrations => 'registrations' }  
   
