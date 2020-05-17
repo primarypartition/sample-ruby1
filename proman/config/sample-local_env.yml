@@ -1,0 +1,13 @@
+# sendgrid API 
+SENDGRID_USERNAME: "xxxxxxxxxx"
+SENDGRID_PASSWORD: "xxxxxxxxxx"
+SENDGRID_API_KEY: "xxxxxxxxxx"
+
+# stripe API
+STRIPE_TEST_PUBLISHABLE_KEY: "xxxxxxxxxx"
+STRIPE_TEST_SECRET_KEY: "xxxxxxxxxx"
+
+# postgres 
+PG_DATABASE_NAME: "xxxxxxxxxx"
+PG_DATABASE_USER: "xxxxxxxxxx"
+PG_DATABASE_PASS: "xxxxxxxxxx"
