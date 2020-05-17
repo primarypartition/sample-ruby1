@@ -1,7 +1,7 @@
-# Ruby and Ruby on Rails Dev Project
+# Ruby and Ruby on Rails Dev Projects
 
 
-## Project Urls
+## Project URLs
 
 
 ### Blog App
@@ -19,6 +19,10 @@
 ### Tasweer (Photo App)
 
 > https://sample-ruby1-tasweer.herokuapp.com/
+
+### Proman (Saas Project App)
+
+> https://sample-ruby1-proman.herokuapp.com/
 
 
 ## Commands
@@ -40,16 +44,20 @@
 > rails g channel Chatee
 > rails credentials:edit 
 > EDITOR=vim rails credentials:edit
-> rails generate bootstrap:install static
-> rails generate bootstrap:layout application
-> rails generate devise:install
-> rails generate devise User
-> rails generate devise:views:locale en
-> rails generate devise:views:bootstrap_templates
+> rails g bootstrap:install static
+> rails g bootstrap:layout application
+> rails g devise:install
+> rails g devise User
+> rails g devise:views:locale en
+> rails g devise:views:bootstrap_templates
 > bundle install
 > bundle install --without production
 > rails g bootstrap:themed Images
 > rails generate uploader Picture
+> rails db:create db:migrate
+> rails new proman -d postgresql
+> rails g controller pages home
+> rails g scaffold Image name:string picture:string user:references
 ```
 
 
@@ -98,7 +106,7 @@ heroku config:set RAILS_MASTER_KEY="$(< config/master.key)"
 > sendgrid > settings > API Keys
 
 ```
-heroku config:set SENDGRID_USERNAME=sg_apikey
+heroku config:set SENDGRID_USERNAME=apikey
 
 heroku config:set SENDGRID_PASSWORD=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
@@ -167,6 +175,7 @@ end
 ```
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
+sudo apt-get --purge remove postgresql postgresql-doc postgresql-common
 ```
 
 
@@ -358,5 +367,66 @@ if Rails.env.production?
     config.fog_directory = ENV['S3_BUCKET']
     config.fog_public = true
   end
+end
+```
+
+
+# postgres setup 
+
+
+### Install
+
+```
+rails new proman -d postgresql
+
+cd proman
+yarn install --check-files
+
+sudo apt-get update
+sudo apt-get upgrade
+
+sudo apt install postgresql postgresql-contrib libpq-dev
+sudo -u postgres psql -c "SELECT version();"
+
+sudo -u postgres createuser -s vagrant
+sudo -u postgres psql
+\password vagrant 
+CREATE DATABASE proman_development;
+\list
+\q
+```
+
+
+### Config config/database.yml
+
+```
+database: <%= ENV['PG_DATABASE_NAME'] %>
+username: <%= ENV['PG_DATABASE_USER'] %> 
+password: <%= ENV['PG_DATABASE_PASS'] %>
+```
+
+### Rails config secret local env file  
+
+> touch config/local_env.yml
+> Add lines in config/local_env.yml
+
+```
+PG_DATABASE_NAME: apikey (DO NOT CHANGE IT)
+PG_DATABASE_USER: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+PG_DATABASE_PASS: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+> Add line in .gitignore 
+```
+config/local_env.yml
+```
+
+> Add lines in config/application.rb
+```
+config.before_configuration do
+  env_file = File.join(Rails.root, 'config', 'local_env.yml')
+  YAML.load(File.open(env_file)).each do |key, value|
+    ENV[key.to_s] = value
+  end if File.exists?(env_file)
 end
 ```

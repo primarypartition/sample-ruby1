@@ -291,7 +291,7 @@ app/views/layouts/application.html.erb
 > sendgrid > settings > API Keys
 
 ```
-heroku config:set SENDGRID_USERNAME=sg_apikey
+heroku config:set SENDGRID_USERNAME=apikey (DO NOT CHANGE)
 heroku config:set SENDGRID_PASSWORD=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 heroku config:get SENDGRID_USERNAME
 heroku config
