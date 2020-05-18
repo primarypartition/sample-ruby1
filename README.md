@@ -24,6 +24,10 @@
 
 > https://sample-ruby1-proman.herokuapp.com/
 
+### Collage (Frontend UI Project App)
+
+> https://sample-ruby1-collage.herokuapp.com/
+
 
 ## Commands
 
