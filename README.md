@@ -439,6 +439,7 @@ end
 ## Materialize 
 
 > https://materializecss.com/
+> https://google.github.io/material-design-icons
 
 ```
 yarn add materialize-css
@@ -450,9 +451,50 @@ yarn add materialize-css
 import 'materialize-css/dist/js/materialize'
 ```
 
-### Add app/assets/stylesheets/materialize.scss
+### Add app/assets/stylesheets/materialize.css.scss
 
 ```
-@import ‘materialize-css/dist/css/materialize’;
+@import "materialize-css/dist/css/materialize";
 ```
+
+### Add app/views/layouts/application.html.erb
+
+```
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+```
+
+
+## jQuery
+
+> https://github.com/rails/jquery-rails
+
+```
+yarn add jquery
+
+```
+ 
+### Edit config/webpack/environment.js
+
+```
+const { environment } = require('@rails/webpacker')
+
+const webpack = require("webpack")
+
+environment.plugins.append("Provide", new webpack.ProvidePlugin({
+
+$: 'jquery',
+
+jQuery: 'jquery'
+
+}))
+
+module.exports = environment
+```
+
+### Edit app/javascript/packs/application.js
+
+Add line in bottom
+
+> require('jquery')
+
 

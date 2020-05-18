@@ -1,12 +1,100 @@
 <nav>
+<!-- Dropdown Account -->
+<ul id="dropdown1" class="dropdown-content">
+  <% if !logged_in? %>
+    <li><%= link_to 'Login', login_path %></li>
+    <li class="divider"></li>
+    
+    <li><%= link_to 'Signup', new_user_path %></li>
+    <li class="divider"></li>
+  <% else %>
+    <li><%= link_to 'Logout', logout_path, method: :delete %></li>
+    <li class="divider"></li>
+    
+    <li><%= link_to 'Profile', user_path(current_user) %></li>
+    <li class="divider"></li>
+  <% end %> 
+</ul>
+
+<!-- Sidebar Dropdown Account -->
+<ul id="dropdown2" class="dropdown-content">
+  <% if !logged_in? %>
+    <li><%= link_to 'Login', login_path %></li>
+    <li class="divider"></li>
+    
+    <li><%= link_to 'Signup', new_user_path %></li>
+    <li class="divider"></li>
+  <% else %>
+    <li><%= link_to 'Logout', logout_path, method: :delete %></li>
+    <li class="divider"></li>
+    
+    <li><%= link_to 'Profile', user_path(current_user) %></li>
+    <li class="divider"></li>
+  <% end %>
+</ul>
+
+<!-- Dropdown Courses -->
+<ul id="dropdownc1" class="dropdown-content">
+  <li><%= link_to 'Courses', courses_path %></li>
+  <li class="divider"></li>  
+
+  <li><%= link_to 'New Course', courses_new_path %></li>
+  <li class="divider"></li>  
+</ul>
+
+<!-- Sidebar Dropdown Courses -->
+<ul id="dropdownc2" class="dropdown-content">
+  <li><%= link_to 'Courses', courses_path %></li>
+  <li class="divider"></li>  
+
+  <li><%= link_to 'New Course', courses_new_path %></li>
+  <li class="divider"></li>  
+</ul>
+
 <div class="container">
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo">Collage</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><%= link_to 'Home', root_path %></li>
+    <%= link_to 'Collage', root_path, class: "brand-logo" %>
+    
+    <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+      <i class="material-icons">menu</i>
+    </a>
+
+    <ul id="nav-mobile" class="right hide-on-med-and-down">      
       <li><%= link_to 'About', about_path %></li>
-      <li><%= link_to 'Courses', courses_new_path %></li>
+           
+      <!-- Dropdown Courses -->
+      <li>
+        <a class="dropdown-trigger" href="#!" data-target="dropdownc1">
+          Courses<i class="material-icons right">arrow_drop_down</i>
+        </a>
+      </li>   
+      
+      <!-- Dropdown Account -->
+      <li>
+        <a class="dropdown-trigger" href="#!" data-target="dropdown1">
+          Account<i class="material-icons right">arrow_drop_down</i>
+        </a>
+      </li>   
     </ul>
   </div>
 </div>
+
+<!-- Sidenav Structure -->
+<ul class="sidenav" id="mobile-demo">
+  <li><%= link_to 'Home', root_path %></li>
+  <li><%= link_to 'About', about_path %></li>
+  <!-- Dropdown Courses -->
+  <li>
+    <a class="dropdown-trigger" href="#!" data-target="dropdownc2">
+      Courses<i class="material-icons right">arrow_drop_down</i>
+    </a>
+  </li> 
+  
+  <!-- Dropdown Account -->
+  <li>
+    <a class="dropdown-trigger" href="#!" data-target="dropdown2">
+      Account<i class="material-icons right">arrow_drop_down</i>
+    </a>
+  </li>   
+</ul>  
 </nav>

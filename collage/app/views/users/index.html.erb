@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col s12">
+    <h3 class="center-align">Students List</h3>
+  </div>
+  
+  <div class="col s12">
+  
+  <div class="row">    
+    <% @students.each do |student| %>
+    <div class="col s12 m6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Name: <%= student.name %></span>
+          <span class="card-title">Email: <%= student.email %></span>
+          <div class="card-content white-text">
+            <ul>
+              <% student.courses.each do |course| %>
+                <li><%= link_to course.name, course_path(course) %></li>
+              <% end %>         
+            </ul>
+          </div>
+        </div>
+        <div class="card-action">
+          <%= link_to 'Profile', user_path(student) %>        
+        </div>
+      </div>
+    </div>
+    <%end %>  
+  </div>
+  
+  </div>  
+</div>

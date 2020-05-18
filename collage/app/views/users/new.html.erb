@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col s12">
+    <h3 class="center-align">New Student</h3>
+  </div>
+  
+  <div class="col s12">
+    <%= render 'share/errors', obj: @user %>
+  </div>
+  
+  <div class="col s12">
+    
+    <%= form_with model: @user, local: true, method: "post" do |f| %>    
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.text_field :name %>
+          <%= label_tag(:name) %>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.email_field :email %>
+          <%= label_tag(:email) %>
+        </div>
+      </div>
+      
+      <div class="row">        
+        <div class="input-field col s12"> 
+          <%= f.password_field :password %>
+          <%= label_tag(:password) %>
+        </div>        
+      </div>
+      
+      <div class="row">        
+        <div class="input-field col s12"> 
+          <%= f.password_field :password_confirmation %>
+          <%= label_tag(:password_confirmation) %>
+        </div>        
+      </div>
+      
+      <div class="row">
+        <div class="input-field col s12">
+          <%= submit_tag("Sign up!", class: "waves-effect waves-light btn") %>
+        </div>
+      </div>     
+    <% end %> 
+  
+  </div>  
+</div>

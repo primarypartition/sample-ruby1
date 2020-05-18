@@ -160,19 +160,13 @@ rails s -b 192.168.33.100 -p 3000
 > touch app/assets/stylesheets/custom.css.scss
 
 
-## Bootstrap setup
+## jQuery
+
+> https://github.com/rails/jquery-rails
 
 ```
-yarn add bootstrap@4.4.1 jquery popper.js
-
+yarn add jquery
 ```
-
-### Edit app/assets/stylesheets/application.css
-
-Add line
-
-> *= require bootstrap
- 
  
 ### Edit config/webpack/environment.js
 
@@ -185,41 +179,26 @@ environment.plugins.append("Provide", new webpack.ProvidePlugin({
 
 $: 'jquery',
 
-jQuery: 'jquery',
-
-Popper: ['popper.js', 'default']
+jQuery: 'jquery'
 
 }))
 
 module.exports = environment
 ```
 
-
 ### Edit app/javascript/packs/application.js
 
-Add line in bottom
-
-> import "bootstrap"
-
-
-### Add custom scss file app/assets/stylesheets/custom.css.scss
-
-> touch app/assets/stylesheets/custom.css.scss
+> Add line in bottom
 
 ```
-@import 'bootstrap/dist/css/bootstrap';
-
-.navbar {
-
-background-color: #FDF6EA !important;
-
-}
+require('jquery')
 ```
 
 
 ## Materialize 
 
 > https://materializecss.com/
+> https://google.github.io/material-design-icons
 
 ```
 yarn add materialize-css
@@ -231,8 +210,14 @@ yarn add materialize-css
 import 'materialize-css/dist/js/materialize'
 ```
 
-### Add app/assets/stylesheets/materialize.scss
+### Add app/assets/stylesheets/materialize.css.scss
 
 ```
-@import ‘materialize-css/dist/css/materialize’;
+@import "materialize-css/dist/css/materialize";
+```
+
+### Add app/views/layouts/application.html.erb
+
+```
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 ```
