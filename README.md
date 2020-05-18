@@ -434,3 +434,25 @@ config.before_configuration do
   end if File.exists?(env_file)
 end
 ```
+
+
+## Materialize 
+
+> https://materializecss.com/
+
+```
+yarn add materialize-css
+```
+
+### Add app/javascript/packs/application.js
+
+```
+import 'materialize-css/dist/js/materialize'
+```
+
+### Add app/assets/stylesheets/materialize.scss
+
+```
+@import ‘materialize-css/dist/css/materialize’;
+```
+

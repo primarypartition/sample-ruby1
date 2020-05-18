@@ -204,7 +204,6 @@ yarn add bootstrap@4.4.1 jquery popper.js
 
 ```
 
-
 ### Edit app/assets/stylesheets/application.css
 
 Add line
@@ -253,4 +252,3 @@ background-color: #FDF6EA !important;
 
 }
 ```
-

@@ -18,10 +18,7 @@ Vagrant.configure("2") do |config|
 
   end
 end
-
 ```
-
-> http://192.168.33.100:3000/
 
 
 ## vagrant machine setup
@@ -150,6 +147,8 @@ heroku rename sample-ruby1-collage
 
 ## Rails server on ubuntu vagrant machine
 
+> http://192.168.33.100:3000/
+
 ```
 rails s -b 192.168.33.100 -p 3000
 
@@ -159,3 +158,81 @@ rails s -b 192.168.33.100 -p 3000
 ## Add custom scss file app/assets/stylesheets/custom.css.scss
 
 > touch app/assets/stylesheets/custom.css.scss
+
+
+## Bootstrap setup
+
+```
+yarn add bootstrap@4.4.1 jquery popper.js
+
+```
+
+### Edit app/assets/stylesheets/application.css
+
+Add line
+
+> *= require bootstrap
+ 
+ 
+### Edit config/webpack/environment.js
+
+```
+const { environment } = require('@rails/webpacker')
+
+const webpack = require("webpack")
+
+environment.plugins.append("Provide", new webpack.ProvidePlugin({
+
+$: 'jquery',
+
+jQuery: 'jquery',
+
+Popper: ['popper.js', 'default']
+
+}))
+
+module.exports = environment
+```
+
+
+### Edit app/javascript/packs/application.js
+
+Add line in bottom
+
+> import "bootstrap"
+
+
+### Add custom scss file app/assets/stylesheets/custom.css.scss
+
+> touch app/assets/stylesheets/custom.css.scss
+
+```
+@import 'bootstrap/dist/css/bootstrap';
+
+.navbar {
+
+background-color: #FDF6EA !important;
+
+}
+```
+
+
+## Materialize 
+
+> https://materializecss.com/
+
+```
+yarn add materialize-css
+```
+
+### Add app/javascript/packs/application.js
+
+```
+import 'materialize-css/dist/js/materialize'
+```
+
+### Add app/assets/stylesheets/materialize.scss
+
+```
+@import ‘materialize-css/dist/css/materialize’;
+```
